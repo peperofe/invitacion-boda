@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invitación - Nuestro 25 Aniversario</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <h1>¡Nos casamos, 25 aniversario!</h1>
+    <p>Estás invitado a celebrar nuestro 25 aniversario</p>
+    <p><strong>Fecha del evento:</strong> 21 de junio</p>
+    <p><strong>Hora:</strong> 19:30</p>
+  </header>
+
+  <main>
+    <form id="rsvpForm">
+      <label for="numAsistentes">Número de asistentes:</label>
+      <input type="number" id="numAsistentes" name="numAsistentes" min="1" required />
+      <div id="asistentesContainer"></div>
+
+      <button type="submit">Confirmar asistencia</button>
+
+      <div id="datosImportantes">
+        <h3>Datos a tener en cuenta</h3>
+        <p>Por favor, revisa bien los datos antes de enviarlos. Si alguien tiene alguna alergia, indícalo con claridad.</p>
+      </div>
+    </form>
+
+    <div class="mensaje" id="mensajeResultado"></div>
+
+    <div id="mensaje"></div>
+
+    <h2>Ubicación del evento</h2>
+    <div id="ubicacion">
+      <iframe
+        src="https://www.google.com/maps?q=38.033356,-1.487347&z=17&output=embed"
+        allowfullscreen=""
+        loading="lazy">
+      </iframe>
+      <p>
+        <a href="https://maps.app.goo.gl/hEMKBvWcwtLTQYU58" target="_blank">
+          📍 Ver en Google Maps
+        </a>
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="nombres-novios">
+      <p>Con todo nuestro amor,</p>
+      <h2>Antonio <span class="corazon">❤</span> Mercedes</h2>
+      <p>25 años juntos · 21 de junio de 2025</p>
+    </div>
+  </footer>
+
+  <!-- Música de fondo -->
+  <audio id="musicaFondo" autoplay loop>
+    <source src="amarte.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML.
+  </audio>
+
+  <!-- Sonidos de feedback -->
+  <audio id="sonidoExito" src="success.mp3" preload="auto"></audio>
+  <audio id="sonidoError" src="error.mp3" preload="auto"></audio>
+
+  <script>
+    // Precargar elementos de audio
+    document.addEventListener('DOMContentLoaded', () => {
+      const sonidoExito = document.getElementById('sonidoExito');
+      const sonidoError = document.getElementById('sonidoError');
+      
+      sonidoExito.load();
+      sonidoError.load();
+    });
+
+    const numAsistentesInput = document.getElementById('numAsistentes');
+    const asistentesContainer = document.getElementById('asistentesContainer');
+    const mensajeResultado = document.getElementById('mensajeResultado');
+    const sonidoExito = document.getElementById('sonidoExito');
+    const sonidoError = document.getElementById('sonidoError');
+
+    numAsistentesInput.addEventListener('input', () => {
+      asistentesContainer.innerHTML = '';
+      const num = parseInt(numAsistentesInput.value);
+      if (!isNaN(num) && num > 0) {
+        for (let i = 1; i <= num; i++) {
+          const div = document.createElement('div');
+          div.classList.add('asistente');
+          div.innerHTML = `
+            <h4>${i}º Asistente</h4>
+            <input type="text" name="nombre${i}" placeholder="Nombre completo" required />
+            <input type="text" name="alergia${i}" placeholder="Alergias (si tiene)" />
+          `;
+          asistentesContainer.appendChild(div);
+        }
+      }
+    });
+
+    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const inputs = this.querySelectorAll('input[required]');
+      let completo = true;
+
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          completo = false;
+          input.style.border = '2px solid red';
+        } else {
+          input.style.border = '1px solid #ccc';
+        }
+      });
+
+      if (completo) {
+        let mensaje = "🎉 *Confirmación de asistencia* 🎉%0A";
+        const numAsistentes = parseInt(document.getElementById('numAsistentes').value);
+
+        for (let i = 1; i <= numAsistentes; i++) {
+          const nombre = this.querySelector(`[name=nombre${i}]`).value.trim();
+          const alergia = this.querySelector(`[name=alergia${i}]`).value.trim();
+          mensaje += `%0A👤 *Asistente ${i}:* ${nombre}`;
+          mensaje += alergia ? `%0A⚠️ Alergia: ${alergia}%0A` : `%0A⚠️ Sin alergias%0A`;
+        }
+
+        const phone = "34696495276";
+        const url = `https://wa.me/${phone}?text=${mensaje}`;
+        window.open(url, '_blank');
+
+        mensajeResultado.textContent = "✅ ¡Asistencia lista para enviar por WhatsApp!";
+        mensajeResultado.className = "mensaje exito";
+        sonidoExito.play().catch(e => console.error("Error al reproducir sonido de éxito:", e));
+
+        this.reset();
+        asistentesContainer.innerHTML = '';
+
+      } else {
+        mensajeResultado.textContent = "❌ Por favor, rellena todos los campos obligatorios.";
+        mensajeResultado.className = "mensaje error";
+        sonidoError.play().catch(e => console.error("Error al reproducir sonido de error:", e));
+      }
+    });
+
+    // Reproducir música al primer clic
+    window.addEventListener('click', () => {
+      const audio = document.getElementById('musicaFondo');
+      if (audio.paused) {
+        audio.play().catch(e => console.error("Error al reproducir música:", e));
+      }
+    }, { once: true });
+  </script>
+</body>
+</html>

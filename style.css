@@ -1,0 +1,173 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('imagen-boda.png') no-repeat center center;
+  background-size: cover;
+  background-position: center 20%;
+  background-attachment: fixed;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #ffd700;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 600;
+  margin-top: 10px;
+  color: #ffffff;
+}
+
+input[type="number"] {
+  width: 80px;
+  height: 30px;
+  font-size: 0.9rem;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  color: #2c2c2c;
+}
+
+input, select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #2c2c2c;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 300px;
+}
+
+button {
+  margin-top: 20px;
+  background-color: #ff4500;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: block;
+  max-width: 300px;
+  margin-left: 0; /* Alinea el botón a la izquierda */
+}
+
+button:hover {
+  background-color: #cc3700;
+}
+
+#datosImportantes {
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #ffffff;
+  margin-top: 20px;
+}
+
+.mensaje {
+  margin-top: 15px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.mensaje.exito {
+  background-color: rgba(0, 128, 0, 0.7);
+}
+
+.mensaje.error {
+  background-color: rgba(255, 0, 0, 0.7);
+}
+
+#asistentesContainer {
+  margin-top: 15px;
+}
+
+.asistente {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.asistente h4 {
+  color: #ffd700;
+  margin-top: 0;
+}
+
+#ubicacion {
+  text-align: center;
+  margin-top: 20px;
+  color: #ffffff;
+}
+
+#ubicacion iframe {
+  width: 80%;
+  max-width: 600px;
+  height: 300px;
+  border: 0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+#ubicacion a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  display: inline-block;
+  padding: 8px 15px;
+  border-radius: 6px;
+}
+
+#ubicacion a:hover {
+  text-decoration: underline;
+  color: #ffd700;
+}
+
+input:invalid {
+  border: 2px solid red !important;
+}
+footer {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 30px 0;
+  text-align: center;
+  margin-top: 40px;
+  border-top: 2px solid #ffd700;
+}
+
+.nombres-novios {
+  color: #ffffff;
+  font-family: 'Playfair Display', serif;
+}
+
+.nombres-novios h2 {
+  font-size: 2.2rem;
+  margin: 10px 0;
+  color: #ffd700;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.nombres-novios p {
+  margin: 5px 0;
+  font-size: 1.1rem;
+}
+
+.corazon {
+  color: #ff6b6b;
+  margin: 0 10px;
+  transition: transform 0.3s;
+  display: inline-block;
+}
+
+.corazon:hover {
+  transform: scale(1.3);
+}
